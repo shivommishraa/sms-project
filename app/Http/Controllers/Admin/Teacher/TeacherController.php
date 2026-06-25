@@ -756,4 +756,82 @@ class TeacherController extends Controller
             'teachers-list.pdf'
         );
     }
+
+    public function exportFilteredPdf(Request $request)
+    {
+        $query = Teacher::with([
+            'department',
+            'designation',
+            'classTeacherAssignment.classMaster',
+            'classTeacherAssignment.section'
+        ]);
+
+        if ($request->filled('search')) {
+
+            $query->where(function ($q) use ($request) {
+
+                $q->where(
+                    'name',
+                    'like',
+                    '%' . $request->search . '%'
+                )
+                ->orWhere(
+                    'employee_id',
+                    'like',
+                    '%' . $request->search . '%'
+                )
+                ->orWhere(
+                    'mobile',
+                    'like',
+                    '%' . $request->search . '%'
+                );
+            });
+        }
+
+        if ($request->filled('department')) {
+
+            $query->where(
+                'department_id',
+                $request->department
+            );
+        }
+
+        if ($request->filled('designation')) {
+
+            $query->where(
+                'designation_id',
+                $request->designation
+            );
+        }
+
+        if ($request->filled('employment_status')) {
+
+            $query->where(
+                'employment_status',
+                $request->employment_status
+            );
+        }
+
+        if ($request->filled('academic_session')) {
+
+            $query->where(
+                'academic_session_id',
+                $request->academic_session
+            );
+        }
+
+        $teachers = $query
+            ->orderBy('name')
+            ->get();
+
+        $pdf = Pdf::loadView(
+            'admin.teachers.list-pdf',
+            compact('teachers')
+        );
+
+        return $pdf->download(
+            'filtered-teachers-list.pdf'
+        );
+    }
+
 }

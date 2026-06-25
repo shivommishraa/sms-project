@@ -1,14 +1,58 @@
+```php
 <!DOCTYPE html>
 <html>
+
 <head>
 
-    <title>Teacher Profile</title>
+    <meta charset="utf-8">
+
+    <title>Teacher Profile Report</title>
 
     <style>
 
         body{
             font-family: DejaVu Sans;
-            font-size:13px;
+            font-size:12px;
+            color:#333;
+            margin:0;
+            padding:0;
+        }
+
+        .header{
+            border-bottom:2px solid #666;
+            padding-bottom:12px;
+            margin-bottom:20px;
+        }
+
+        .college-name{
+            font-size:22px;
+            font-weight:bold;
+            color:#222;
+            text-transform:uppercase;
+        }
+
+        .college-address{
+            font-size:11px;
+            color:#555;
+            margin-top:3px;
+        }
+
+        .report-title{
+            margin-top:8px;
+            font-size:16px;
+            font-weight:bold;
+            color:#444;
+            letter-spacing:1px;
+        }
+
+        .section-title{
+            background:#666;
+            color:#fff;
+            padding:8px;
+            font-size:14px;
+            font-weight:bold;
+            margin-top:15px;
+            margin-bottom:0;
         }
 
         table{
@@ -16,159 +60,405 @@
             border-collapse:collapse;
         }
 
-        table td{
-            border:1px solid #ddd;
+        th{
+            background:#f2f2f2;
+            border:1px solid #ccc;
+            padding:8px;
+            text-align:left;
+            width:30%;
+        }
+
+        td{
+            border:1px solid #ccc;
             padding:8px;
         }
 
-        h2{
+        .footer{
+            margin-top:30px;
             text-align:center;
+            font-size:11px;
+            color:#666;
         }
 
     </style>
 
 </head>
+
 <body>
 
-<h2>
+    <div class="header">
 
-    Teacher Profile
+        <table style="border:none;">
 
-</h2>
+            <tr>
 
-<table>
+                <td
+                    style="
+                        border:none;
+                        width:70px;
+                        vertical-align:middle;
+                    ">
 
-<tr>
+                    <img
+                        src="{{ public_path('images/college-logo.png') }}"
+                        style="
+                            width:55px;
+                            height:55px;
+                        ">
 
-    <td width="30%">
-        Employee ID
-    </td>
+                </td>
 
-    <td>
-        {{ $teacher->employee_id }}
-    </td>
+                <td
+                    style="
+                        border:none;
+                        text-align:center;
+                    ">
 
-</tr>
+                    <div class="college-name">
 
-<tr>
+                        ABC COLLEGE OF EDUCATION
 
-    <td>
-        Name
-    </td>
+                    </div>
 
-    <td>
-        {{ $teacher->name }}
-    </td>
+                    <div class="college-address">
 
-</tr>
+                        Sitapur Road, Lucknow,
+                        Uttar Pradesh - 226021
 
-<tr>
+                    </div>
 
-    <td>
-        Department
-    </td>
+                    <div class="college-address">
 
-    <td>
-        {{ $teacher->department->name ?? '' }}
-    </td>
+                        Phone :
+                        +91-9876543210
 
-</tr>
+                        |
 
-<tr>
+                        Email :
+                        info@abccollege.edu.in
 
-    <td>
-        Designation
-    </td>
+                    </div>
 
-    <td>
-        {{ $teacher->designation->name ?? '' }}
-    </td>
+                    <div class="report-title">
 
-</tr>
+                        TEACHER PROFILE REPORT
 
-<tr>
+                    </div>
 
-    <td>
-        Mobile
-    </td>
+                </td>
 
-    <td>
-        {{ $teacher->mobile }}
-    </td>
+            </tr>
 
-</tr>
+        </table>
 
-<tr>
+    </div>
 
-    <td>
-        Email
-    </td>
+    <div class="section-title">
 
-    <td>
-        {{ $teacher->email }}
-    </td>
+        Basic Information
 
-</tr>
+    </div>
 
-<tr>
+    <table>
 
-    <td>
-        Qualification
-    </td>
+        <tr>
 
-    <td>
-        {{ $teacher->qualification }}
-    </td>
+            <th>Employee ID</th>
 
-</tr>
+            <td>{{ $teacher->employee_id }}</td>
 
-<tr>
+        </tr>
 
-    <td>
-        Experience
-    </td>
+        <tr>
 
-    <td>
-        {{ $teacher->experience }}
-    </td>
+            <th>Teacher Name</th>
 
-</tr>
+            <td>{{ $teacher->name }}</td>
 
-<tr>
+        </tr>
 
-    <td>
-        Employment Status
-    </td>
+        <tr>
 
-    <td>
-        {{ $teacher->employment_status }}
-    </td>
+            <th>Gender</th>
 
-</tr>
+            <td>{{ $teacher->gender }}</td>
 
-<tr>
+        </tr>
 
-    <td>
-        Subjects
-    </td>
+        <tr>
 
-    <td>
+            <th>Date Of Birth</th>
 
-        @foreach($teacher->subjects as $subject)
+            <td>{{ $teacher->dob }}</td>
 
-            {{ $subject->name }}
+        </tr>
 
-            @if(!$loop->last)
-                ,
-            @endif
+        <tr>
 
-        @endforeach
+            <th>Department</th>
 
-    </td>
+            <td>{{ $teacher->department->name ?? '-' }}</td>
 
-</tr>
+        </tr>
 
-</table>
+        <tr>
+
+            <th>Designation</th>
+
+            <td>{{ $teacher->designation->name ?? '-' }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Academic Session</th>
+
+            <td>{{ $teacher->academicSession->name ?? '-' }}</td>
+
+        </tr>
+
+    </table>
+
+    <div class="section-title">
+
+        Professional Information
+
+    </div>
+
+    <table>
+
+        <tr>
+
+            <th>Qualification</th>
+
+            <td>{{ $teacher->qualification }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Experience</th>
+
+            <td>{{ $teacher->experience }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Joining Date</th>
+
+            <td>{{ $teacher->joining_date }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Service End Date</th>
+
+            <td>{{ $teacher->service_end_date ?? '-' }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Employment Status</th>
+
+            <td>{{ $teacher->employment_status }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Status</th>
+
+            <td>
+
+                {{ $teacher->status ? 'Active' : 'Inactive' }}
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="section-title">
+
+        Contact Information
+
+    </div>
+
+    <table>
+
+        <tr>
+
+            <th>Mobile</th>
+
+            <td>{{ $teacher->mobile }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Alternate Mobile</th>
+
+            <td>{{ $teacher->alternate_mobile ?? '-' }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Email</th>
+
+            <td>{{ $teacher->email ?? '-' }}</td>
+
+        </tr>
+
+        <tr>
+
+            <th>Address</th>
+
+            <td>{{ $teacher->address ?? '-' }}</td>
+
+        </tr>
+
+    </table>
+
+    <div class="section-title">
+
+        Assigned Subjects
+
+    </div>
+
+    <table>
+
+        <tr>
+
+            <td>
+
+                @forelse($teacher->subjects as $subject)
+
+                    {{ $subject->name }}
+
+                    @if(!$loop->last)
+
+                        ,
+
+                    @endif
+
+                @empty
+
+                    No Subject Assigned
+
+                @endforelse
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="section-title">
+
+        Class Teacher Assignment
+
+    </div>
+
+    <table>
+
+        <tr>
+
+            <th>Class</th>
+
+            <td>
+
+                {{
+                    optional(
+                        optional(
+                            $teacher->classTeacherAssignment
+                        )->classMaster
+                    )->name ?? '-'
+                }}
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <th>Section</th>
+
+            <td>
+
+                {{
+                    optional(
+                        optional(
+                            $teacher->classTeacherAssignment
+                        )->section
+                    )->name ?? '-'
+                }}
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="section-title">
+
+        Short Bio
+
+    </div>
+
+    <table>
+
+        <tr>
+
+            <td>
+
+                {{ $teacher->short_bio ?? '-' }}
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="section-title">
+
+        Description
+
+    </div>
+
+    <table>
+
+        <tr>
+
+            <td>
+
+                {{ $teacher->description ?? '-' }}
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="footer">
+
+        --------------------------------------------------
+
+        <br><br>
+
+        Generated On :
+        {{ now()->format('d-m-Y h:i A') }}
+
+        <br>
+
+        ABC College Of Education
+
+    </div>
 
 </body>
+
 </html>
+```

@@ -243,6 +243,14 @@ Route::middleware(['auth'])->group(function () {
         [TeacherController::class,'exportPdf']
     )->name('teachers.export.pdf');
 
+
+    Route::get(
+        'teachers-export-pdf-filtered',
+        [TeacherController::class, 'exportFilteredPdf']
+    )->name('teachers.export.pdf.filtered');
+
+
+
 });
 
 require __DIR__.'/auth.php';

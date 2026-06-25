@@ -4,11 +4,13 @@
 
 @section('content')
 
-<div class="card">
+<div class="card shadow">
 
-    <div class="card-header">
+    <div class="card-header bg-primary text-white">
 
-        <h4 class="d-inline">
+        <h4 class="d-inline mb-0">
+
+            <i class="fas fa-user-tie"></i>
 
             Teacher Profile
 
@@ -47,33 +49,79 @@
 
         <div class="row">
 
-            <div class="col-md-3 text-center">
+            <div class="col-md-3">
 
-                @if($teacher->image)
+                <div class="card">
 
-                    <img
-                        src="{{ asset('uploads/teachers/'.$teacher->image) }}"
-                        class="img-thumbnail"
-                        style="max-width:220px;">
+                    <div class="card-body text-center">
 
-                @else
+                        @if($teacher->image)
 
-                    <img
-                        src="{{ asset('images/no-image.png') }}"
-                        class="img-thumbnail"
-                        style="max-width:220px;">
+                            <img
+                                src="{{ asset('uploads/teachers/'.$teacher->image) }}"
+                                class="img-thumbnail"
+                                style="max-width:220px;">
 
-                @endif
+                        @else
+
+                            <img
+                                src="{{ asset('images/no-image.png') }}"
+                                class="img-thumbnail"
+                                style="max-width:220px;">
+
+                        @endif
+
+                        <h5 class="mt-3">
+
+                            {{ $teacher->name }}
+
+                        </h5>
+
+                        <p class="text-muted">
+
+                            {{ $teacher->designation->name ?? '-' }}
+
+                        </p>
+
+                        <span class="badge badge-primary">
+
+                            {{ $teacher->employee_id }}
+
+                        </span>
+
+                        <br><br>
+
+                        @if($teacher->status)
+
+                            <span class="badge badge-success">
+
+                                Active
+
+                            </span>
+
+                        @else
+
+                            <span class="badge badge-danger">
+
+                                Inactive
+
+                            </span>
+
+                        @endif
+
+                    </div>
+
+                </div>
 
             </div>
 
             <div class="col-md-9">
 
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped">
 
                     <tr>
 
-                        <th width="250">
+                        <th width="250" class="bg-light">
 
                             Employee ID
 
@@ -89,7 +137,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Teacher Name
 
@@ -105,7 +153,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Gender
 
@@ -121,7 +169,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Date Of Birth
 
@@ -137,7 +185,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Department
 
@@ -153,7 +201,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Designation
 
@@ -169,7 +217,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Academic Session
 
@@ -185,7 +233,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Qualification
 
@@ -201,7 +249,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Experience
 
@@ -217,7 +265,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Joining Date
 
@@ -233,7 +281,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Service End Date
 
@@ -241,7 +289,7 @@
 
                         <td>
 
-                            {{ $teacher->service_end_date }}
+                            {{ $teacher->service_end_date ?? '-' }}
 
                         </td>
 
@@ -249,7 +297,7 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Employment Status
 
@@ -269,15 +317,14 @@
 
                     <tr>
 
-                        <th>
+                        <th class="bg-light">
 
                             Active Status
 
                         </th>
 
                         <td>
-
-                            @if($teacher->status)
+                                                    @if($teacher->status)
 
                                 <span class="badge badge-success">
 
@@ -307,17 +354,19 @@
 
         <hr>
 
-        <h5>
+        <h5 class="text-primary">
+
+            <i class="fas fa-phone"></i>
 
             Contact Information
 
         </h5>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
 
             <tr>
 
-                <th width="250">
+                <th width="250" class="bg-light">
 
                     Mobile
 
@@ -333,7 +382,7 @@
 
             <tr>
 
-                <th>
+                <th class="bg-light">
 
                     Alternate Mobile
 
@@ -341,7 +390,7 @@
 
                 <td>
 
-                    {{ $teacher->alternate_mobile }}
+                    {{ $teacher->alternate_mobile ?? '-' }}
 
                 </td>
 
@@ -349,7 +398,7 @@
 
             <tr>
 
-                <th>
+                <th class="bg-light">
 
                     Email
 
@@ -357,7 +406,7 @@
 
                 <td>
 
-                    {{ $teacher->email }}
+                    {{ $teacher->email ?? '-' }}
 
                 </td>
 
@@ -365,7 +414,7 @@
 
             <tr>
 
-                <th>
+                <th class="bg-light">
 
                     Address
 
@@ -373,7 +422,7 @@
 
                 <td>
 
-                    {{ $teacher->address }}
+                    {{ $teacher->address ?? '-' }}
 
                 </td>
 
@@ -383,73 +432,55 @@
 
         <hr>
 
-        <h5>
+        <h5 class="text-info">
+
+            <i class="fas fa-book"></i>
 
             Assigned Subjects
 
         </h5>
 
-        <table class="table table-bordered">
+        <div class="card">
 
-            <thead>
-
-                <tr>
-
-                    <th>
-
-                        Subject Name
-
-                    </th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
+            <div class="card-body">
 
                 @forelse($teacher->subjects as $subject)
 
-                    <tr>
+                    <span
+                        class="badge badge-primary mr-2 mb-2 p-2">
 
-                        <td>
+                        {{ $subject->name }}
 
-                            {{ $subject->name }}
-
-                        </td>
-
-                    </tr>
+                    </span>
 
                 @empty
 
-                    <tr>
+                    <span class="text-danger">
 
-                        <td>
+                        No Subject Assigned
 
-                            No Subject Assigned
-
-                        </td>
-
-                    </tr>
+                    </span>
 
                 @endforelse
 
-            </tbody>
+            </div>
 
-        </table>
+        </div>
 
         <hr>
+                <h5 class="text-success">
 
-        <h5>
+            <i class="fas fa-chalkboard-teacher"></i>
 
             Class Teacher Assignment
 
         </h5>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
 
             <tr>
 
-                <th width="250">
+                <th width="250" class="bg-light">
 
                     Class
 
@@ -458,8 +489,11 @@
                 <td>
 
                     {{
-                        $teacher->classTeacherAssignment->classMaster->name
-                        ?? '-'
+                        optional(
+                            optional(
+                                $teacher->classTeacherAssignment
+                            )->classMaster
+                        )->name ?? '-'
                     }}
 
                 </td>
@@ -468,7 +502,7 @@
 
             <tr>
 
-                <th>
+                <th class="bg-light">
 
                     Section
 
@@ -477,8 +511,11 @@
                 <td>
 
                     {{
-                        $teacher->classTeacherAssignment->section->name
-                        ?? '-'
+                        optional(
+                            optional(
+                                $teacher->classTeacherAssignment
+                            )->section
+                        )->name ?? '-'
                     }}
 
                 </td>
@@ -489,29 +526,33 @@
 
         <hr>
 
-        <h5>
+        <h5 class="text-warning">
+
+            <i class="fas fa-user-edit"></i>
 
             Short Bio
 
         </h5>
 
-        <div class="border p-3">
+        <div class="border rounded p-3 bg-light">
 
-            {!! nl2br(e($teacher->short_bio)) !!}
+            {!! nl2br(e($teacher->short_bio ?? '-')) !!}
 
         </div>
 
         <hr>
 
-        <h5>
+        <h5 class="text-dark">
+
+            <i class="fas fa-align-left"></i>
 
             Description
 
         </h5>
 
-        <div class="border p-3">
+        <div class="border rounded p-3 bg-light">
 
-            {!! nl2br(e($teacher->description)) !!}
+            {!! nl2br(e($teacher->description ?? '-')) !!}
 
         </div>
 

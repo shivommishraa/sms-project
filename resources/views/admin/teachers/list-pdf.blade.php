@@ -1,113 +1,330 @@
+```php
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<title>
-Teachers List
-</title>
+    <meta charset="utf-8">
 
-<style>
+    <title>
 
-body{
-    font-family: DejaVu Sans;
-    font-size:12px;
-}
+        Teachers List Report
 
-table{
-    width:100%;
-    border-collapse:collapse;
-}
+    </title>
 
-table th,
-table td{
+    <style>
 
-    border:1px solid #000;
+        body{
+            font-family: DejaVu Sans;
+            font-size:11px;
+            color:#333;
+        }
 
-    padding:6px;
-}
+        .header{
+            border-bottom:2px solid #666;
+            padding-bottom:12px;
+            margin-bottom:20px;
+        }
 
-</style>
+        .college-name{
+            font-size:22px;
+            font-weight:bold;
+            color:#222;
+            text-transform:uppercase;
+        }
+
+        .college-address{
+            font-size:11px;
+            color:#555;
+            margin-top:3px;
+        }
+
+        .report-title{
+            margin-top:8px;
+            font-size:16px;
+            font-weight:bold;
+            color:#444;
+            letter-spacing:1px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        table th{
+            background:#666;
+            color:#fff;
+            border:1px solid #444;
+            padding:8px;
+            text-align:center;
+            font-size:11px;
+        }
+
+        table td{
+            border:1px solid #ccc;
+            padding:7px;
+            font-size:10px;
+        }
+
+        .text-center{
+            text-align:center;
+        }
+
+        .footer{
+            margin-top:25px;
+            text-align:center;
+            font-size:10px;
+            color:#666;
+        }
+
+        .summary{
+            margin-bottom:15px;
+            font-size:12px;
+            font-weight:bold;
+        }
+
+    </style>
 
 </head>
+
 <body>
 
-<h2>
+    <div class="header">
 
-Teachers List
+        <table style="border:none;">
 
-</h2>
+            <tr>
 
-<table>
+                <td
+                    style="
+                        border:none;
+                        width:70px;
+                    ">
 
-<thead>
+                    <img
+                        src="{{ public_path('images/college-logo.png') }}"
+                        style="
+                            width:55px;
+                            height:55px;
+                        ">
 
-<tr>
+                </td>
 
-    <th>ID</th>
+                <td
+                    style="
+                        border:none;
+                        text-align:center;
+                    ">
 
-    <th>Name</th>
+                    <div class="college-name">
 
-    <th>Department</th>
+                        ABC COLLEGE OF EDUCATION
 
-    <th>Designation</th>
+                    </div>
 
-    <th>Mobile</th>
+                    <div class="college-address">
 
-    <th>Status</th>
+                        Sitapur Road, Lucknow,
+                        Uttar Pradesh - 226021
 
-</tr>
+                    </div>
 
-</thead>
+                    <div class="college-address">
 
-<tbody>
+                        Phone :
+                        +91-9876543210
 
-@foreach($teachers as $teacher)
+                        |
 
-<tr>
+                        Email :
+                        info@abccollege.edu.in
 
-    <td>
+                    </div>
 
-        {{ $teacher->employee_id }}
+                    <div class="report-title">
 
-    </td>
+                        TEACHERS MASTER REPORT
 
-    <td>
+                    </div>
 
-        {{ $teacher->name }}
+                </td>
 
-    </td>
+            </tr>
 
-    <td>
+        </table>
 
-        {{ $teacher->department->name ?? '' }}
+    </div>
 
-    </td>
+    <div class="summary">
 
-    <td>
+        Total Teachers :
+        {{ $teachers->count() }}
 
-        {{ $teacher->designation->name ?? '' }}
+    </div>
 
-    </td>
+    <table>
 
-    <td>
+        <thead>
 
-        {{ $teacher->mobile }}
+            <tr>
 
-    </td>
+                <th width="5%">
 
-    <td>
+                    Sr.
 
-        {{ $teacher->employment_status }}
+                </th>
 
-    </td>
+                <th width="10%">
 
-</tr>
+                    Employee ID
 
-@endforeach
+                </th>
 
-</tbody>
+                <th width="18%">
 
-</table>
+                    Teacher Name
+
+                </th>
+
+                <th width="12%">
+
+                    Department
+
+                </th>
+
+                <th width="12%">
+
+                    Designation
+
+                </th>
+
+                <th width="10%">
+
+                    Mobile
+
+                </th>
+
+                <th width="15%">
+
+                    Email
+
+                </th>
+
+                <th width="8%">
+
+                    Gender
+
+                </th>
+
+                <th width="10%">
+
+                    Employment
+
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @forelse($teachers as $teacher)
+
+                <tr>
+
+                    <td class="text-center">
+
+                        {{ $loop->iteration }}
+
+                    </td>
+
+                    <td>
+
+                        {{ $teacher->employee_id }}
+
+                    </td>
+
+                    <td>
+
+                        {{ $teacher->name }}
+
+                    </td>
+
+                    <td>
+
+                        {{ $teacher->department->name ?? '-' }}
+
+                    </td>
+
+                    <td>
+
+                        {{ $teacher->designation->name ?? '-' }}
+
+                    </td>
+
+                    <td>
+
+                        {{ $teacher->mobile }}
+
+                    </td>
+
+                    <td>
+
+                        {{ $teacher->email ?? '-' }}
+
+                    </td>
+
+                    <td class="text-center">
+
+                        {{ $teacher->gender ?? '-' }}
+
+                    </td>
+
+                    <td class="text-center">
+
+                        {{ $teacher->employment_status }}
+
+                    </td>
+
+                </tr>
+
+            @empty
+
+                <tr>
+
+                    <td
+                        colspan="9"
+                        class="text-center">
+
+                        No Teachers Found
+
+                    </td>
+
+                </tr>
+
+            @endforelse
+
+        </tbody>
+
+    </table>
+
+    <div class="footer">
+
+        --------------------------------------------------
+
+        <br><br>
+
+        Generated On :
+        {{ now()->format('d-m-Y h:i A') }}
+
+        <br>
+
+        ABC College Of Education
+
+    </div>
 
 </body>
+
 </html>
+```
