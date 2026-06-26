@@ -328,19 +328,7 @@ return [
             'label_color' => 'success',
         ],*/
         ['header' => 'BACKEND MANAGEMENT'],
-        [
-            'text' => 'Academics',
-            'icon' => 'fas fa-school',
-            'submenu' => [
-
-                [
-                    'text' => 'Teachers',
-                    'url'  => 'teachers',
-                    'icon' => 'fas fa-chalkboard-teacher',
-                ],
-
-            ],
-        ],
+        
         [
             'text' => 'Master Management',
             'icon' => 'fas fa-graduation-cap',
@@ -385,7 +373,24 @@ return [
 
             ],
         ],
-       
+        [
+            'text' => 'Academics',
+            'icon' => 'fas fa-school',
+            'submenu' => [
+
+                [
+                    'text' => 'Teachers',
+                    'url'  => 'teachers',
+                    'icon' => 'fas fa-chalkboard-teacher',
+                ],
+                [
+                    'text' => 'Students',
+                    'route' => 'students.index',
+                    'icon' => 'fas fa-user-graduate',
+                ],
+
+            ],
+        ],
         [
             'text' => 'Customers',
             'icon' => 'fas fa-fw fa-users',

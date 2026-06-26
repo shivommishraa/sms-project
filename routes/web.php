@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Section\SectionController;
 use App\Http\Controllers\Admin\Subject\SubjectController;
 use App\Http\Controllers\Admin\AcademicSession\AcademicSessionController;
 use App\Http\Controllers\Admin\Teacher\TeacherController;
+use App\Http\Controllers\Admin\Student\StudentController;
 
 
 
@@ -249,8 +250,22 @@ Route::middleware(['auth'])->group(function () {
         [TeacherController::class, 'exportFilteredPdf']
     )->name('teachers.export.pdf.filtered');
 
+});
 
+/*
+|--------------------------------------------------------------------------
+| Students
+|--------------------------------------------------------------------------
+*/
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource( 'students', StudentController::class ); 
+    Route::post( 'students/{student}/status', [StudentController::class,'changeStatus'] )->name('students.status'); 
+    Route::get( 'students/{student}/pdf', [StudentController::class,'downloadPdf'] )->name('students.pdf'); 
+    Route::get( 'students-export-excel', [StudentController::class,'exportExcel'] )->name('students.export.excel'); 
+    Route::get( 'students-export-pdf', [StudentController::class,'exportPdf'] )->name('students.export.pdf'); 
+    Route::get( 'students-export-pdf-filtered', [StudentController::class,'exportFilteredPdf'] )->name('students.export.pdf.filtered');
 });
 
 require __DIR__.'/auth.php';
