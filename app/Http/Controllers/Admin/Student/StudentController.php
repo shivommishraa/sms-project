@@ -1203,4 +1203,91 @@ class StudentController extends Controller
 
         );
     }
+    /*
+|--------------------------------------------------------------------------
+| Attendance Report
+|--------------------------------------------------------------------------
+*/
+
+public function report(Request $request)
+{
+
+    $sessions = AcademicSession::orderBy('name')->get();
+
+    $departments = Department::orderBy('name')->get();
+
+    $classes = ClassMaster::orderBy('name')->get();
+
+    $sections = Section::orderBy('name')->get();
+
+    $attendance = collect();
+
+    if ($request->filled([
+        'academic_session_id',
+        'department_id',
+        'class_master_id',
+        'section_id',
+        'from_date',
+        'to_date'
+    ])) {
+
+        $attendance = StudentAttendance::with([
+
+                'student',
+
+                'department',
+
+                'classMaster',
+
+                'section',
+
+                'academicSession'
+
+            ])
+
+            ->where('academic_session_id', $request->academic_session_id)
+
+            ->where('department_id', $request->department_id)
+
+            ->where('class_master_id', $request->class_master_id)
+
+            ->where('section_id', $request->section_id)
+
+            ->whereBetween('attendance_date', [
+
+                $request->from_date,
+
+                $request->to_date
+
+            ])
+
+            ->orderBy('attendance_date')
+
+            ->orderBy('student_id')
+
+            ->get();
+
+    }
+
+    return view(
+
+        'admin.attendance.students.report',
+
+        compact(
+
+            'sessions',
+
+            'departments',
+
+            'classes',
+
+            'sections',
+
+            'attendance'
+
+        )
+
+    );
+
+}
 }

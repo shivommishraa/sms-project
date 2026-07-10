@@ -188,4 +188,17 @@ class Student extends Model
             Section::class
         );
     }
+
+    /*
+        |--------------------------------------------------------------------------
+        | Student Attendance
+        |--------------------------------------------------------------------------
+        */
+
+        public function attendances()
+        {
+            return $this->hasMany(
+                \App\Models\Attendance\StudentAttendance::class
+            );
+        }
 }

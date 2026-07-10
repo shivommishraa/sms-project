@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\Subject\SubjectController;
 use App\Http\Controllers\Admin\AcademicSession\AcademicSessionController;
 use App\Http\Controllers\Admin\Teacher\TeacherController;
 use App\Http\Controllers\Admin\Student\StudentController;
+use App\Http\Controllers\Admin\Attendance\StudentAttendanceController;
+use App\Http\Controllers\Admin\Attendance\TeacherAttendanceController;
 
 
 
@@ -266,6 +268,96 @@ Route::middleware(['auth'])->group(function () {
     Route::get( 'students-export-excel', [StudentController::class,'exportExcel'] )->name('students.export.excel'); 
     Route::get( 'students-export-pdf', [StudentController::class,'exportPdf'] )->name('students.export.pdf'); 
     Route::get( 'students-export-pdf-filtered', [StudentController::class,'exportFilteredPdf'] )->name('students.export.pdf.filtered');
+});
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Student Attendance
+    |--------------------------------------------------------------------------
+    */
+Route::prefix('attendance')->name('attendance.')->group(function () {
+
+
+    // Attendance Page
+    Route::get(
+        'students',
+        [StudentAttendanceController::class, 'index']
+    )->name('students.index');
+
+
+    // Load Students
+    Route::get(
+        'students/load',
+        [StudentAttendanceController::class, 'loadStudents']
+    )->name('students.load');
+
+
+    // Save Attendance
+    Route::post(
+        'students/store',
+        [StudentAttendanceController::class, 'store']
+    )->name('students.store');
+
+
+    // Attendance Report
+    Route::get(
+        'students/report',
+        [StudentAttendanceController::class, 'report']
+    )->name('students.report');
+
+
+    // PDF Export
+    Route::get(
+        'students/report/pdf',
+        [StudentAttendanceController::class, 'reportPdf']
+    )->name('students.report.pdf');
+
+
+    // Excel Export
+    Route::get(
+        'students/report/excel',
+        [StudentAttendanceController::class, 'reportExcel']
+    )->name('students.report.excel');
+
+
+}); /*
+    |--------------------------------------------------------------------------
+    | Teacher Attendance
+    |--------------------------------------------------------------------------
+    */
+Route::prefix('attendance')->group(function () {
+
+    Route::get(
+        'teachers',
+        [TeacherAttendanceController::class, 'index']
+    )->name('attendance.teachers.index');
+
+    Route::get(
+        'teachers/load',
+        [TeacherAttendanceController::class, 'loadTeachers']
+    )->name('attendance.teachers.load');
+
+    Route::post(
+        'teachers/store',
+        [TeacherAttendanceController::class, 'store']
+    )->name('attendance.teachers.store');
+
+    Route::get(
+        'teachers/report',
+        [TeacherAttendanceController::class, 'report']
+    )->name('attendance.teachers.report');
+
+    Route::get(
+        'teachers/report/pdf',
+        [TeacherAttendanceController::class, 'reportPdf']
+    )->name('attendance.teachers.report.pdf');
+
+    Route::get(
+        'teachers/report/excel',
+        [TeacherAttendanceController::class, 'reportExcel']
+    )->name('attendance.teachers.report.excel');
+
 });
 
 require __DIR__.'/auth.php';

@@ -328,7 +328,56 @@ return [
             'label_color' => 'success',
         ],*/
         ['header' => 'BACKEND MANAGEMENT'],
-        
+        [
+    'text' => 'Attendance',
+
+    'icon' => 'fas fa-user-check',
+
+    'submenu' => [
+
+        [
+
+            'text' => 'Student Attendance',
+
+            'route' => 'attendance.students.index',
+
+            'icon' => 'fas fa-user-graduate',
+
+        ],
+
+        [
+
+            'text' => 'Student Attendance Report',
+
+            'route' => 'attendance.students.report',
+
+            'icon' => 'fas fa-file-alt',
+
+        ],
+
+        [
+
+            'text' => 'Teacher Attendance',
+
+            'route' => 'attendance.teachers.index',
+
+            'icon' => 'fas fa-chalkboard-teacher',
+
+        ],
+
+        [
+
+            'text' => 'Teacher Attendance Report',
+
+            'route' => 'attendance.teachers.report',
+
+            'icon' => 'fas fa-file-alt',
+
+        ],
+
+    ]
+
+],
         [
             'text' => 'Master Management',
             'icon' => 'fas fa-graduation-cap',

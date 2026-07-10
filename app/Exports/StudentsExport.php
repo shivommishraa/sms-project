@@ -2,120 +2,139 @@
 
 namespace App\Exports;
 
-use App\Models\Student\Student;
+use App\Models\Attendance\StudentAttendance;
+use App\Models\AcademicSession\AcademicSession;
+use App\Models\Department\Department;
+use App\Models\ClassMaster\ClassMaster;
+use App\Models\Section\Section;
+
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Events\AfterSheet;
-use PhpOffice\PhpSpreadsheet\Style\Font;
-class StudentsExport implements
+
+class StudentAttendanceExport implements
     FromCollection,
     WithHeadings,
     WithMapping,
-    ShouldAutoSize,
-    WithEvents
+    ShouldAutoSize
 {
+
+    protected $academic_session_id;
+    protected $department_id;
+    protected $class_master_id;
+    protected $section_id;
+    protected $from_date;
+    protected $to_date;
+
+    public function __construct(
+        $academic_session_id,
+        $department_id,
+        $class_master_id,
+        $section_id,
+        $from_date,
+        $to_date
+    ) {
+
+        $this->academic_session_id = $academic_session_id;
+        $this->department_id = $department_id;
+        $this->class_master_id = $class_master_id;
+        $this->section_id = $section_id;
+        $this->from_date = $from_date;
+        $this->to_date = $to_date;
+    }
+
     public function collection()
     {
-        return Student::with([
-            'department',
-            'academicSession',
-            'classMaster',
-            'section'
-        ])->orderBy('name')->get();
+
+        return StudentAttendance::with([
+
+                'student',
+
+                'department',
+
+                'classMaster',
+
+                'section'
+
+            ])
+
+            ->where('academic_session_id', $this->academic_session_id)
+
+            ->where('department_id', $this->department_id)
+
+            ->where('class_master_id', $this->class_master_id)
+
+            ->where('section_id', $this->section_id)
+
+            ->whereBetween('attendance_date', [
+
+                $this->from_date,
+
+                $this->to_date
+
+            ])
+
+            ->orderBy('attendance_date')
+
+            ->orderBy('student_id')
+
+            ->get();
+
     }
 
     public function headings(): array
     {
+
         return [
+
+            'Attendance Date',
+
             'Admission No',
+
             'Roll No',
+
             'Student Name',
+
             'Department',
-            'Academic Session',
+
             'Class',
+
             'Section',
-            'Gender',
-            'Date Of Birth',
-            'Blood Group',
-            'Category',
-            'Religion',
-            'Student Mobile',
-            'Father Name',
-            'Father Mobile',
-            'Father Occupation',
-            'Mother Name',
-            'Mother Mobile',
-            'Mother Occupation',
-            'Guardian Name',
-            'Guardian Mobile',
-            'Guardian Relation',
-            'Email',
-            'Emergency Contact',
-            'Address',
-            'City',
-            'State',
-            'Pincode',
-            'Transport',
-            'Bus Number',
-            'Previous School',
+
             'Status',
+
+            'Remarks',
+
         ];
+
     }
 
-    public function map($student): array
+    public function map($row): array
     {
+
         return [
-            $student->admission_no,
-            $student->roll_no,
-            $student->name,
-            $student->department->name ?? '-',
-            $student->academicSession->name ?? '-',
-            $student->classMaster->name ?? '-',
-            $student->section->name ?? '-',
-            $student->gender,
-            optional($student->dob)->format('d-m-Y'),
-            $student->blood_group,
-            $student->category,
-            $student->religion,
-            $student->student_mobile,
-            $student->father_name,
-            $student->father_mobile,
-            $student->father_occupation,
-            $student->mother_name,
-            $student->mother_mobile,
-            $student->mother_occupation,
-            $student->guardian_name,
-            $student->guardian_mobile,
-            $student->guardian_relation,
-            $student->email,
-            $student->emergency_contact,
-            $student->address,
-            $student->city,
-            $student->state,
-            $student->pincode,
-            $student->transport_required ? 'Yes' : 'No',
-            $student->bus_number,
-            $student->previous_school,
-            $student->status ? 'Active' : 'Inactive',
+
+            optional($row->attendance_date)->format('d-m-Y'),
+
+            $row->student->admission_no ?? '',
+
+            $row->student->roll_no ?? '',
+
+            $row->student->name ?? '',
+
+            $row->department->name ?? '',
+
+            $row->classMaster->name ?? '',
+
+            $row->section->name ?? '',
+
+            $row->status,
+
+            $row->remarks,
+
         ];
+
     }
 
-    public function registerEvents(): array
-    {
-        return [
-            AfterSheet::class => function (AfterSheet $event) {
-
-                // Header row ko bold karna (Row 1)
-                $event->sheet->getStyle('A1:AG1')->applyFromArray([
-                    'font' => [
-                        'bold' => true,
-                    ],
-                ]);
-
-            },
-        ];
-    }
 }

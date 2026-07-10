@@ -132,6 +132,19 @@ class Teacher extends Model
         );
     }
 
+        /*
+    |--------------------------------------------------------------------------
+    | Teacher Attendance
+    |--------------------------------------------------------------------------
+    */
+
+    public function attendances()
+    {
+        return $this->hasMany(
+            \App\Models\Attendance\TeacherAttendance::class
+        );
+    }
+
 
     
 }
