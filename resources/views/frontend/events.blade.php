@@ -1,75 +1,107 @@
 @extends('frontend.layouts.app')
-
-@section('title','Home')
-
+@section('title','News & Events')
 @section('content')
 
-
-<!-- add content for this page -->
-
-<main class="main">
-
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
-      <div class="heading">
+<!-- Page Title -->
+<div class="page-title" data-aos="fade">
+    <div class="heading">
         <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1>Events</h1>
-              <p class="mb-0">Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p>
+            <div class="row d-flex justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1>News & Events</h1>
+                    <p class="mb-0">
+                        Stay informed about the latest school news, celebrations,
+                        competitions, educational tours and upcoming events at
+                        ABC Public School.
+                    </p>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <nav class="breadcrumbs">
+    </div>
+
+    <nav class="breadcrumbs">
         <div class="container">
-          <ol>
-            <li><a href="{{ route('home') }}">Home</a></li>
-            <li class="current">Events</li>
-          </ol>
+            <ol>
+                <li><a href="{{ route('home') }}">Home</a></li>
+                <li class="current">News & Events</li>
+            </ol>
         </div>
-      </nav>
-    </div><!-- End Page Title -->
+    </nav>
+</div>
 
-    <!-- Events Section -->
-    <section id="events" class="events section">
+<!-- Events Section -->
+<section id="events" class="events section">
 
-      <div class="container" data-aos="fade-up">
+    <div class="container" data-aos="fade-up">
 
         <div class="row">
-          <div class="col-md-6 d-flex align-items-stretch">
-            <div class="card">
-              <div class="card-img">
-                <img src="{{ asset('frontend/assets/img/event/event-item-1.webp') }}" alt="...">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"><a href="">Introduction to webdesign</a></h5>
-                <p class="fst-italic text-center">Sunday, September 26th at 7:00 pm</p>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 d-flex align-items-stretch">
-            <div class="card">
-              <div class="card-img">
-                <img src="{{ asset('frontend/assets/img/event/event-item-2.webp') }}" alt="...">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title"><a href="">Marketing Strategies</a></h5>
-                <p class="fst-italic text-center">Sunday, November 15th at 7:00 pm</p>
-                <p class="card-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</p>
-              </div>
+
+            <!-- Event 1 -->
+            <div class="col-md-6 d-flex align-items-stretch">
+                <div class="card">
+
+                    <div class="card-img">
+                        <img src="{{ asset('frontend/assets/img/event/event-item-1.webp') }}" alt="">
+                    </div>
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            <a href="">Annual Science Exhibition</a>
+                        </h5>
+
+                        <p class="fst-italic text-center">
+                            Saturday, 15 August | 10:00 AM
+                        </p>
+
+                        <p class="card-text">
+                            Students will showcase innovative science models,
+                            experiments and creative projects developed under the
+                            guidance of experienced teachers. Parents are warmly
+                            invited to witness their talent.
+                        </p>
+
+                    </div>
+
+                </div>
             </div>
 
-          </div>
+            <!-- Event 2 -->
+            <div class="col-md-6 d-flex align-items-stretch">
+
+                <div class="card">
+
+                    <div class="card-img">
+                        <img src="{{ asset('frontend/assets/img/event/event-item-2.webp') }}" alt="">
+                    </div>
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            <a href="">Annual Sports Meet</a>
+                        </h5>
+
+                        <p class="fst-italic text-center">
+                            Saturday, 29 August | 9:00 AM
+                        </p>
+
+                        <p class="card-text">
+                            Join us for an exciting day of athletics, team games,
+                            cultural performances and prize distribution.
+                            Students will demonstrate teamwork, confidence and
+                            sportsmanship.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-      </div>
+    </div>
 
-    </section><!-- /Events Section -->
-
-  </main>
-
-
+</section>
 
 @endsection

@@ -24,20 +24,20 @@
           <ul>
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('home') }}">About us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="#">Academics</a></li>
             <li><a href="#">Terms of service</a></li>
             <li><a href="#">Privacy policy</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
+          <h4>Other Links</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="#">Admissions</a></li>
+            <li><a href="#">News & Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <!-- <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li> -->
           </ul>
         </div>
 
