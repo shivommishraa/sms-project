@@ -48,7 +48,7 @@
      data-aos="fade-up"
      data-aos-delay="100">
 
-<img src="{{ asset('frontend/assets/img/admission/admission.jpg') }}"
+<img src="{{ asset('frontend/assets/img/academics/admission-open.png') }}"
 class="img-fluid rounded"
 alt="Admission">
 

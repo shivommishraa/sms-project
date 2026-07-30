@@ -15,7 +15,7 @@
         <h2 data-aos="fade-up" data-aos-delay="100">Welcome to ABC Public School,<br>Shaping Bright Futures</h2>
         <p data-aos="fade-up" data-aos-delay="200">Providing quality education with modern teaching methods, experienced faculty and holistic development for every student.</p>
         <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-          <a href="courses.html" class="btn-get-started">Get Started</a>
+          <a href="{{route('courses') }}" class="btn-get-started">Get Started</a>
         </div>
       </div>
 
@@ -257,7 +257,7 @@
     <div class="row align-items-center">
 
       <div class="col-lg-4 text-center" data-aos="fade-right">
-        <img src="{{ asset('frontend/assets/img/principal.jpg') }}"
+        <img src="{{ asset('frontend/assets/img/person/principle-images.jpg') }}"
              class="img-fluid rounded shadow"
              alt="Principal">
       </div>

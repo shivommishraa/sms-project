@@ -42,7 +42,7 @@
                  data-aos="fade-up"
                  data-aos-delay="100">
 
-                <img src="{{ asset('frontend/assets/img/academics/academic-overview.jpg') }}"
+                <img src="{{ asset('frontend/assets/img/academics/acadamics-images.jpg') }}"
                      class="img-fluid rounded"
                      alt="Academic Overview">
 

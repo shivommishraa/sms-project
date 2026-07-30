@@ -3,13 +3,13 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="{{ route('home') }}" class="logo d-flex align-items-center">
-            <span class="sitename">SMS</span>
+            <span class="sitename">ABC</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
+            <p>Anand Puram</p>
+            <p>Delhi, DL 535022</p>
             <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p><strong>Email:</strong> <span>info@abc.com</span></p>
           </div>
           <div class="social-links d-flex mt-4">
             <a href=""><i class="bi bi-twitter-x"></i></a>
@@ -36,6 +36,7 @@
             <li><a href="#">Admissions</a></li>
             <li><a href="#">News & Events</a></li>
             <li><a href="#">Gallery</a></li>
+            <li><a href="{{ route('login') }}">Admin</a></li>
             <!-- <li><a href="#">Marketing</a></li>
             <li><a href="#">Graphic Design</a></li> -->
           </ul>
@@ -43,7 +44,7 @@
 
         <div class="col-lg-4 col-md-12 footer-newsletter">
           <h4>Our Newsletter</h4>
-          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          <p>Subscribe to our newsletter and receive the latest news about our school!</p>
           <form action="forms/newsletter.php" method="post" class="php-email-form">
             <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
             <div class="loading">Loading</div>
